@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/google/uuid"
+	//"github.com/google/uuid"
 	"github.com/opencode-ai/opencode/internal/config"
 	"github.com/opencode-ai/opencode/internal/llm/tools"
 	"github.com/opencode-ai/opencode/internal/logging"
@@ -224,7 +224,8 @@ func (g *geminiClient) send(ctx context.Context, messages []message.Message, too
 				case part.Text != "":
 					content = string(part.Text)
 				case part.FunctionCall != nil:
-					id := "call_" + uuid.New().String()
+					//id := "call_" + uuid.New().String()
+					id := generateToolCallID()
 					args, _ := json.Marshal(part.FunctionCall.Args)
 					toolCalls = append(toolCalls, message.ToolCall{
 						ID:       id,
@@ -336,7 +337,8 @@ func (g *geminiClient) stream(ctx context.Context, messages []message.Message, t
 								currentContent += delta
 							}
 						case part.FunctionCall != nil:
-							id := "call_" + uuid.New().String()
+							//id := "call_" + uuid.New().String()
+							id := generateToolCallID()
 							args, _ := json.Marshal(part.FunctionCall.Args)
 							newCall := message.ToolCall{
 								ID:       id,
@@ -429,7 +431,8 @@ func (g *geminiClient) toolCalls(resp *genai.GenerateContentResponse) []message.
 	if len(resp.Candidates) > 0 && resp.Candidates[0].Content != nil {
 		for _, part := range resp.Candidates[0].Content.Parts {
 			if part.FunctionCall != nil {
-				id := "call_" + uuid.New().String()
+				//id := "call_" + uuid.New().String()
+				id := generateToolCallID()
 				args, _ := json.Marshal(part.FunctionCall.Args)
 				toolCalls = append(toolCalls, message.ToolCall{
 					ID:    id,
