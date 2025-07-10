@@ -23,8 +23,8 @@ import (
 
 var rootCmd = &cobra.Command{
 	Use:   "opencode",
-	Short: "Terminal-based AI assistant for software development",
-	Long: `OpenCode is a powerful terminal-based AI assistant that helps with software development tasks.
+	Short: "Terminal-based AI assistant for software development. Focus to work with Local LLMs.",
+	Long: `[LocalAI] OpenCode is a powerful terminal-based AI assistant that helps with software development tasks.
 It provides an interactive chat interface with AI capabilities, code analysis, and LSP integration
 to assist developers in writing, debugging, and understanding code directly from the terminal.`,
 	Example: `
