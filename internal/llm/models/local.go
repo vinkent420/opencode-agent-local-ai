@@ -22,7 +22,7 @@ const (
 )
 
 func init() {
-	if endpoint := os.Getenv("LOCAL_ENDPOINT"); endpoint != "" {
+	if endpoint := os.Getenv("LLM_BASE_URL"); endpoint != "" {
 		localEndpoint, err := url.Parse(endpoint)
 		if err != nil {
 			logging.Debug("Failed to parse local endpoint",
@@ -105,7 +105,7 @@ func listLocalModels(modelsEndpoint string) []localModel {
 	var supportedModels []localModel
 	for _, model := range modelList.Data {
 		if strings.HasSuffix(modelsEndpoint, lmStudioBetaModelsPath) {
-			if model.Object != "model" || model.Type != "llm" {
+			if model.Object != "model" {
 				logging.Debug("Skipping unsupported LMStudio model",
 					"endpoint", modelsEndpoint,
 					"id", model.ID,

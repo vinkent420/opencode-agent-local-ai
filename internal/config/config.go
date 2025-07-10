@@ -277,12 +277,12 @@ func setProviderDefaults() {
 		// api-key may be empty when using Entra ID credentials – that's okay
 		viper.SetDefault("providers.azure.apiKey", os.Getenv("AZURE_OPENAI_API_KEY"))
 	}
-	if apiKey, err := LoadGitHubToken(); err == nil && apiKey != "" {
-		viper.SetDefault("providers.copilot.apiKey", apiKey)
-		if viper.GetString("providers.copilot.apiKey") == "" {
-			viper.Set("providers.copilot.apiKey", apiKey)
-		}
-	}
+	//if apiKey, err := LoadGitHubToken(); err == nil && apiKey != "" {
+	//	viper.SetDefault("providers.copilot.apiKey", apiKey)
+	//	if viper.GetString("providers.copilot.apiKey") == "" {
+	//		viper.Set("providers.copilot.apiKey", apiKey)
+	//	}
+	//}
 
 	// Use this order to set the default models
 	// 1. Copilot
